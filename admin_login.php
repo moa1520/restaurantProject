@@ -34,11 +34,16 @@ if(isset($_POST['submit'])) {
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
     <form method="post" action="admin_login.php">
-    <table border="1" align="center">
+    <div class="col-sm-4">
+    <table class="table">
+    <thead>
         <tr>
             <th colspan="2">Admin Login</th>
         </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>
                 Admin Name
@@ -60,7 +65,10 @@ if(isset($_POST['submit'])) {
                 <input type="submit" name="submit" value="Admin Log-in">
             </td>
         </tr>
+        </tbody>
     </table>
+    </div>
 </form>
+</div>
 </body>
 </html>
