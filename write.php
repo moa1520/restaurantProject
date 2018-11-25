@@ -1,11 +1,57 @@
 <?php
-session_start();
+    $con = mysqli_connect("localhost","root","kang1318","user_db");
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $error = $_FILES['image']['error'];
+
+        if(empty($_POST['title'])) {
+            echo "<script> alert('제목을 입력해주세요') </script>";
+        } else {
+            $title = $_POST['title'];
+        }
+
+        if($_POST['board'] == "") {
+            echo "<script> alert('학교를 선택해주세요') </script>";
+        } else {
+            $board = $_POST['board'];
+        }
+
+        if($error != UPLOAD_ERR_OK) {
+            echo "<script> alert('사진을 업로드 해주세요') </script>";
+        } else {
+            $file = $_FILES['image']['tmp_name'];
+        }
+
+        if(empty($_POST['comment'])) {
+            echo "<script> alert('내용을 입력해주세요') </script>";
+        } else {
+            $comment = $_POST['comment'];
+        }
+
+        if(isset($file)) {
+            $image_data = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+            $image_name = addslashes($_FILES['image']['name']);
+            $image_size = getimagesize($_FILES['image']['tmp_name']);
+
+            if($image_size == FALSE) {
+                echo "<script> alert('사진이 아닙니다') </script>";
+            } else {
+                $sql = "INSERT INTO post VALUES(NULL, '$board', '$title', '$image_name','$image_data', '$comment')";
+
+                if(!mysqli_query($con, $sql)) {
+                    echo "Problem in uploading image" . mysqli_error($con);
+                } else {
+                    header("Location: index.php");
+                }
+            }
+        }
+    }
 ?>
 <html lang="ko-KR">
 
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>대학별 맛집</title>
+    <title>맛집 작성</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -72,55 +118,35 @@ session_start();
             </div>
             <div class="col-sm-9">
                 <div class="page-header">
-                    <h1>xx대학교 맛집 리스트</h1>
+                    <h1>맛집 작성</h1>
                 </div>
-                <!-- <?php
-                    $con = mysqli_connect('localhost','root','kang1318','user_db');
-                    $query = "SELECT * FROM post";
-                    $result = mysqli_query($con, $query);
-
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $title = $row['title'];
-                        $image = $row['data'];
-                        $comment = $row['comment'];
-                ?> -->
-                <a href="#">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/lights.jpg" style="width=100%">
-                            <!-- <?php echo $image; ?> -->
-                            <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                                <!-- <p><?=$id?></p> -->
-                            </div>
-                        </div>
+                <form action="write.php" method="POST" enctype="multipart/form-data">
+                <label>학교</label>
+                <select name="board">
+                    <option value="">학교 선택</option>
+                    <option value="hansung">한성대학교</option>
+                    <option value="kookmin">국민대학교</option>
+                    <option value="hongik">홍익대학교</option>
+                    <option value="konkuk">건국대학교</option>
+                    <option value="kyunghee">경희대학교</option>
+                    <option value="hanyang">한양대학교</option>
+                </select>
+                <div class="form-group">
+                        <label>제목</label>
+                        <input type="text" class="form-control" name="title" placeholder="게시글 제목을 입력하세요">
                     </div>
-                </a>
-                <!-- <?php } ?> -->
-                <a href="#">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/nature.jpg" style="width=100%">
-                            <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>사진</label>
+                        <input type="file" name="image">
                     </div>
-                </a>
-                <a href="#">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/fjords.jpg" style="width=100%">
-                            <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>내용</label>
+                        <textarea class="form-control" rows="5" name="comment"></textarea>
                     </div>
-                </a>
-                <div class="col-sm-12" align="right">
-                    <a href='write.php' class='btn btn-primary' role='button'>글쓰기</a>
-                </div>
+                    <div class="col-sm-12" align="right">
+                        <button type="submit" class="btn btn-primary" name="submit">글쓰기</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
