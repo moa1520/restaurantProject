@@ -1,7 +1,11 @@
 <?php
+    session_start();
     $con = mysqli_connect("localhost","root","kang1318","user_db");
+
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = $_FILES['image']['error'];
+
+        $username = $_SESSION['login'];
 
         if(empty($_POST['title'])) {
             echo "<script> alert('제목을 입력해주세요') </script>";
@@ -35,7 +39,7 @@
             if($image_size == FALSE) {
                 echo "<script> alert('사진이 아닙니다') </script>";
             } else {
-                $sql = "INSERT INTO post VALUES(NULL, '$board', '$title', '$image_name','$image_data', '$comment')";
+                $sql = "INSERT INTO post VALUES(NULL, '$username', '$board', '$title', '$image_name','$image_data', '$comment')";
 
                 if(!mysqli_query($con, $sql)) {
                     echo "Problem in uploading image" . mysqli_error($con);
@@ -65,7 +69,7 @@
                     <a href="index.php" style="color: black; text-decoration: none"><h2>대학 맛집 리스트</h2></a>
                     <?php
                     if(!isset($_SESSION['login'])) {
-                        echo "<a href='login.php' class='btn btn-default' role='button'>로그인</a>";
+                        echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
                     } else { ?>
                     <h2><small>Welcome <?= $_SESSION['login'] ?></small>
                     <a href="logout.php" class="btn btn-default" role="button">Logout</a></h2>
@@ -104,7 +108,7 @@
                         <br>
                         <?php
                             if(!isset($_SESSION['login'])) {
-                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>관리자 로그인</a>";
+                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>ADMIN LOGIN</a>";
                             }?>
                         
                         <!-- <a href="#" class="list-group-item">국민대학교</a>
@@ -120,18 +124,22 @@
                 <div class="page-header">
                     <h1>맛집 작성</h1>
                 </div>
-                <form action="write.php" method="POST" enctype="multipart/form-data">
-                <label>학교</label>
-                <select name="board">
-                    <option value="">학교 선택</option>
-                    <option value="hansung">한성대학교</option>
-                    <option value="kookmin">국민대학교</option>
-                    <option value="hongik">홍익대학교</option>
-                    <option value="konkuk">건국대학교</option>
-                    <option value="kyunghee">경희대학교</option>
-                    <option value="hanyang">한양대학교</option>
-                </select>
                 <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" class="form-control" placeholder="<?=$_SESSION['login']?>" disabled>
+                </div>
+                <form action="write.php" method="POST" enctype="multipart/form-data">
+                    <label>학교</label>
+                    <select name="board">
+                        <option value="">학교 선택</option>
+                        <option value="hansung">한성대학교</option>
+                        <option value="kookmin">국민대학교</option>
+                        <option value="hongik">홍익대학교</option>
+                        <option value="konkuk">건국대학교</option>
+                        <option value="kyunghee">경희대학교</option>
+                        <option value="hanyang">한양대학교</option>
+                    </select>
+                    <div class="form-group">
                         <label>제목</label>
                         <input type="text" class="form-control" name="title" placeholder="게시글 제목을 입력하세요">
                     </div>
@@ -144,7 +152,7 @@
                         <textarea class="form-control" rows="5" name="comment"></textarea>
                     </div>
                     <div class="col-sm-12" align="right">
-                        <button type="submit" class="btn btn-primary" name="submit">글쓰기</button>
+                        <button type="submit" class="btn btn-primary" name="submit">CONFIRM</button>
                     </div>
                 </form>
             </div>

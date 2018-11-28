@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+$con = mysqli_connect('localhost','root','kang1318','user_db');
+$query = "SELECT id, title, data, comment FROM post order by id DESC";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_array($result);
+
 ?>
 <html lang="ko-KR">
 
@@ -19,7 +25,7 @@ session_start();
                     <a href="index.php" style="color: black; text-decoration: none"><h2>대학 맛집 리스트</h2></a>
                     <?php
                     if(!isset($_SESSION['login'])) {
-                        echo "<a href='login.php' class='btn btn-default' role='button'>로그인</a>";
+                        echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
                     } else { ?>
                     <h2><small>Welcome <?= $_SESSION['login'] ?></small>
                     <a href="logout.php" class="btn btn-default" role="button">Logout</a></h2>
@@ -58,7 +64,7 @@ session_start();
                         <br>
                         <?php
                             if(!isset($_SESSION['login'])) {
-                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>관리자 로그인</a>";
+                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>ADMIN LOGIN</a>";
                             }?>
                         
                         <!-- <a href="#" class="list-group-item">국민대학교</a>
@@ -74,52 +80,30 @@ session_start();
                 <div class="page-header">
                     <h1>xx대학교 맛집 리스트</h1>
                 </div>
-                <!-- <?php
-                    $con = mysqli_connect('localhost','root','kang1318','user_db');
-                    $query = "SELECT * FROM post";
-                    $result = mysqli_query($con, $query);
-
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $title = $row['title'];
-                        $image = $row['data'];
-                        $comment = $row['comment'];
-                ?> -->
-                <a href="#">
+                <?php
+                    while($row) {
+                ?>
+                <a href="view.php?id=<?=$row['id']?>">
                     <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/lights.jpg" style="width=100%">
-                            <!-- <?php echo $image; ?> -->
+                        <div class="thumbnail" style="height:220px">
+                            <img src="view.php?id=<?=$row['id']?>" style="width:100%; height:150px">
                             <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                                <!-- <p><?=$id?></p> -->
+                                <p><?=$row['comment']?></p>
                             </div>
                         </div>
                     </div>
                 </a>
-                <!-- <?php } ?> -->
-                <a href="#">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/nature.jpg" style="width=100%">
-                            <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            <img src="https://www.w3schools.com/w3images/fjords.jpg" style="width=100%">
-                            <div class="caption">
-                                <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                <?php
+                $row = mysqli_fetch_array($result);
+                }
+                ?>
                 <div class="col-sm-12" align="right">
-                    <a href='write.php' class='btn btn-primary' role='button'>글쓰기</a>
+                    <?php 
+                    if(isset($_SESSION['login'])) {
+                        echo "<a href='write.php' class='btn btn-primary' role='button'>+ WRITE</a>";
+                    }
+                    ?>
+                    <!-- <button type="submit" class="btn btn-primary" name="submit">+ WRITE</button> -->
                 </div>
             </div>
         </div>

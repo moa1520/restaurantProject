@@ -30,7 +30,7 @@ if(!isset($_SESSION['adminlogin'])) {
     <tbody>
         <?php
         $con = mysqli_connect('localhost','root','kang1318','user_db');
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM users order by id DESC";
         $result = mysqli_query($con, $query);
 
         while($row = mysqli_fetch_array($result)) {
@@ -54,7 +54,7 @@ if(!isset($_SESSION['adminlogin'])) {
         <?php } ?>
     </tbody>
 </table>
-<a href='logout.php' class='btn btn-default' role='button'>로그아웃</a>
+<a href='logout.php' class='btn btn-default' role='button'>LOGOUT</a>
 </div>
 </body>
 </html>
