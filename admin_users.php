@@ -9,6 +9,7 @@ if(!isset($_SESSION['adminlogin'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>관리자 페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -30,7 +31,7 @@ if(!isset($_SESSION['adminlogin'])) {
     <tbody>
         <?php
         $con = mysqli_connect('localhost','root','kang1318','user_db');
-        $query = "SELECT * FROM users order by id DESC";
+        $query = "SELECT * FROM users order by top DESC";
         $result = mysqli_query($con, $query);
 
         while($row = mysqli_fetch_array($result)) {
@@ -48,7 +49,7 @@ if(!isset($_SESSION['adminlogin'])) {
                 <a href="modify.php?mod=<?=$id?>&name=<?=$username?>" class="btn btn-default" role="button">Modify</a>
             </td>
             <td>
-                <a href="delete.php?del=<?=$id?>" class="btn btn-default" role="button">Delete</a>
+                <a href="delete.php?del=<?=$id?>" class="btn btn-default" role="button" onclick="return confirm('정말 삭제할까요?');">Delete</a>
             </td>
         </tr>
         <?php } ?>

@@ -56,6 +56,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>맛집 작성</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -67,16 +68,18 @@
             <div class="col-sm-3">
                 <div class="row" style="padding: 10px">
                     <a href="index.php" style="color: black; text-decoration: none"><h2>대학 맛집 리스트</h2></a>
-                    <?php
-                    if(!isset($_SESSION['login'])) {
-                        echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
-                    } else { ?>
-                    <h2><small>Welcome <?= $_SESSION['login'] ?></small>
-                    <a href="logout.php" class="btn btn-default" role="button">Logout</a></h2>
-                    <?php } ?>
                 </div>
                 <div class="row" style="padding: 10px">
                     <div class="list-group">
+                        <?php
+                        if(!isset($_SESSION['login'])) {
+                            echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
+                        } else { ?>
+                        <p style="font-size:16pt; color:darkgray">Welcome <b><?= $_SESSION['login'] ?></b></p>
+                        <a href='usermodify.php' class='btn btn-light' role='button'>MODIFY</a>
+                        <a href="logout.php" class='btn btn-light' role='button' style="margin-top:10px">LOGOUT</a>
+                        <?php } ?>
+                        <br>
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">전체 보기</h4>
                             <p class="list-group-item-text">View All</p>
@@ -149,7 +152,7 @@
                     </div>
                     <div class="form-group">
                         <label>내용</label>
-                        <textarea class="form-control" rows="5" name="comment"></textarea>
+                        <textarea class="form-control" rows="5" name="comment" placeholder="내용을 입력하세요"></textarea>
                     </div>
                     <div class="col-sm-12" align="right">
                         <button type="submit" class="btn btn-primary" name="submit">CONFIRM</button>

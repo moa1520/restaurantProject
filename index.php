@@ -12,6 +12,7 @@ $row = mysqli_fetch_array($result);
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>대학별 맛집</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -23,16 +24,18 @@ $row = mysqli_fetch_array($result);
             <div class="col-sm-3">
                 <div class="row" style="padding: 10px">
                     <a href="index.php" style="color: black; text-decoration: none"><h2>대학 맛집 리스트</h2></a>
-                    <?php
-                    if(!isset($_SESSION['login'])) {
-                        echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
-                    } else { ?>
-                    <h2><small>Welcome <?= $_SESSION['login'] ?></small>
-                    <a href="logout.php" class="btn btn-default" role="button">Logout</a></h2>
-                    <?php } ?>
                 </div>
                 <div class="row" style="padding: 10px">
                     <div class="list-group">
+                        <?php
+                        if(!isset($_SESSION['login'])) {
+                            echo "<a href='login.php' class='btn btn-light' role='button'>LOGIN</a>";
+                        } else { ?>
+                        <p style="font-size:16pt; color:darkgray">Welcome <b><?= $_SESSION['login'] ?></b></p>
+                        <a href='usermodify.php' class='btn btn-light' role='button'>MODIFY</a>
+                        <a href="logout.php" class='btn btn-light' role='button' style="margin-top:10px">LOGOUT</a>
+                        <?php } ?>
+                        <br>
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">전체 보기</h4>
                             <p class="list-group-item-text">View All</p>
@@ -64,7 +67,7 @@ $row = mysqli_fetch_array($result);
                         <br>
                         <?php
                             if(!isset($_SESSION['login'])) {
-                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>ADMIN LOGIN</a>";
+                                echo "<a href='admin_login.php' class='btn btn-light' role='button'>ADMIN LOGIN</a>";
                             }?>
                         
                         <!-- <a href="#" class="list-group-item">국민대학교</a>
@@ -78,7 +81,7 @@ $row = mysqli_fetch_array($result);
             </div>
             <div class="col-sm-9">
                 <div class="page-header">
-                    <h1>xx대학교 맛집 리스트</h1>
+                    <h1>전체 대학교 맛집 리스트</h1>
                 </div>
                 <?php
                     while($row) {

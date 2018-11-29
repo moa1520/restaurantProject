@@ -33,6 +33,22 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        function showHint(str) {
+            if(str.length==0) {
+                document.getElementById("hint").innerHTML="";
+                return;
+            }
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("hint").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","gethint.php?q="+str,true);
+            xmlhttp.send();
+        }
+    </script>
 </head>
 
 <body>
@@ -52,13 +68,18 @@ if(isset($_POST['submit'])) {
                             <tr>
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control" placeholder="Enter ID">
+                                        <input type="text" name="username" class="form-control" placeholder="Enter ID" onkeyup="showHint(this.value)">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control" placeholder="Enter Password">
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>Suggestion: <span id="hint"></span></p>
                                 </td>
                             </tr>
                             <tr>
