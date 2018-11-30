@@ -1,71 +1,49 @@
 <?php
     session_start();
+    $id = $_GET['id'];
     $con = mysqli_connect("localhost","root","kang1318","user_db");
+    $query = "SELECT * FROM post WHERE id='$id'";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_array($result);
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $error = $_FILES['image']['error'];
-
-        $username = $_SESSION['login'];
-
-        if(empty($_POST['title'])) {
-            echo "<script> alert('제목을 입력해주세요') </script>";
-        } else {
-            $title = $_POST['title'];
-        }
-
-        if($_POST['board'] == "") {
-            echo "<script> alert('학교를 선택해주세요') </script>";
-        } else {
-            $board = $_POST['board'];
-        }
-
-        if($error != UPLOAD_ERR_OK) {
-            echo "<script> alert('사진을 업로드 해주세요') </script>";
-        } else {
-            $file = $_FILES['image']['tmp_name'];
-        }
-
-        if(empty($_POST['comment'])) {
-            echo "<script> alert('내용을 입력해주세요') </script>";
-        } else {
-            $comment = $_POST['comment'];
-        }
-
-        if(isset($file)) {
-            $image_data = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-            $image_name = addslashes($_FILES['image']['name']);
-            $image_size = getimagesize($_FILES['image']['tmp_name']);
-
-            if($image_size == FALSE) {
-                echo "<script> alert('사진이 아닙니다') </script>";
-            } else {
-                $sql = "INSERT INTO post VALUES(NULL, '$username', '$board', '$title', '$image_name','$image_data', '$comment', now())";
-
-                if(!mysqli_query($con, $sql)) {
-                    echo "Problem in uploading image" . mysqli_error($con);
-                } else {
-                    header("Location: index.php");
-                }
-            }
+    function change($str) {
+        switch($str) {
+            case 'hansung':
+                return "한성대학교";
+                break;
+            case 'kookmin':
+                return "국민대학교";
+                break;
+            case 'hongik':
+                return "홍익대학교";
+                break;
+            case 'konkuk':
+                return "건국대학교";
+                break;
+            case 'kyunghee':
+                return "경희대학교";
+                break;
+            case 'hanyang':
+                return "한양대학교";
+                break;
         }
     }
+    $university = change($row['board']);
 ?>
-<html lang="ko-KR">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>맛집 작성</title>
+    <title><?=$row['title']?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-
 <body>
     <div class="container">
         <div class="row">
-        <div class="col-sm-3">
+            <div class="col-sm-3">
                 <div class="row" style="padding: 10px">
                     <a href="index.php" style="color: black; text-decoration: none"><h2><p style="color:black; font-weight:bold">대학 맛집 리스트</p></h2></a>
                 </div>
@@ -93,7 +71,6 @@
                             <input class="form-control mr-sm-3" type="search" placeholder="Search">
                             <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
-
                         <br>
                         <?php
                             if(!isset($_SESSION['login'])) {
@@ -105,39 +82,17 @@
             </div>
             <div class="col-sm-9">
                 <div class="page-header">
-                    <h1>맛집 작성</h1>
+                    <h1>전체 대학교 맛집 리스트</h1>
                 </div>
-                <div class="form-group">
-                    <label>ID</label>
-                    <input type="text" class="form-control" placeholder="<?=$_SESSION['login']?>" disabled>
+                <div class="card sm-3">
+                    <img class="card-img-top" src="view.php?id=<?=$row['id']?>" alt="Card image cap" height="500">
+                    <div class="card-body">
+                        <h5 class="card-title"><b><?=$row['title']?></b></h5>
+                        <p class="card-text"><?=$row['comment']?></p>
+                        <p class="card-text"><small class="text-muted">작성자 : <?=$row['username']?></small></p>
+                        <p class="card-text"><small class="text-muted"><?=substr($row['regdate'],5,11)?></small></p>
+                    </div>
                 </div>
-                <form action="write.php" method="POST" enctype="multipart/form-data">
-                    <label>학교</label>
-                    <select name="board">
-                        <option value="">학교 선택</option>
-                        <option value="hansung">한성대학교</option>
-                        <option value="kookmin">국민대학교</option>
-                        <option value="hongik">홍익대학교</option>
-                        <option value="konkuk">건국대학교</option>
-                        <option value="kyunghee">경희대학교</option>
-                        <option value="hanyang">한양대학교</option>
-                    </select>
-                    <div class="form-group">
-                        <label>제목</label>
-                        <input type="text" class="form-control" name="title" placeholder="게시글 제목을 입력하세요">
-                    </div>
-                    <div class="form-group">
-                        <label>사진</label>
-                        <input type="file" name="image">
-                    </div>
-                    <div class="form-group">
-                        <label>내용</label>
-                        <textarea class="form-control" rows="5" name="comment" placeholder="내용을 입력하세요"></textarea>
-                    </div>
-                    <div class="col-sm-12" align="right">
-                        <button type="submit" class="btn btn-primary" name="submit">CONFIRM</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

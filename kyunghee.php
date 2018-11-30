@@ -6,7 +6,7 @@ if(isset($_GET['done'])) {
 }
 
 $con = mysqli_connect('localhost','root','kang1318','user_db');
-$query = "SELECT * FROM post order by id DESC";
+$query = "SELECT * FROM post WHERE board='kyunghee' order by id DESC";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result);
 
