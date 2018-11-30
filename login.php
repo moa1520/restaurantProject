@@ -30,6 +30,7 @@ if(isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>로그인</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -53,48 +54,40 @@ if(isset($_POST['submit'])) {
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h2>로그인</h2>
+        <div align='center'>
+                <h2><p style="color:forestgreen"><b>Login</b></p></h2>
                 <form method="post" action="login.php">
-                    <table class="table">
-                        <thead>
+                    <table>
+                        <tbody align='center'>
                             <tr>
-                                <th>ID</th>
-                                <th>PASSWORD</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="form-group">
-                                        <input type="text" name="username" class="form-control" placeholder="Enter ID" onkeyup="showHint(this.value)">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                        <input type="text" size="60" name="username" class="form-control" placeholder="ID" onkeyup="showHint(this.value)">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <p>Suggestion: <span id="hint"></span></p>
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control" placeholder="Password">
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <button type="submit" class="btn btn-default" name="submit">Submit</button>
+                                <td colspan="2">
+                                    <p align='left'>Suggestion: <span id="hint"></span></p>
                                 </td>
-                                <td>
-                                    <a href="registration.php" class="btn btn-default" role="button">Registration</a>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Login</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
+                <b>Aren't you a member? <a href="registration.php"> Registration </a></b>
             </div>
-        </div>
     </div>
 </body>
 

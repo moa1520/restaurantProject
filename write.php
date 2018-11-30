@@ -65,22 +65,40 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+        <div class="col-sm-3">
                 <div class="row" style="padding: 10px">
-                    <a href="index.php" style="color: black; text-decoration: none"><h2>대학 맛집 리스트</h2></a>
+                    <a href="index.php" style="color: black; text-decoration: none"><h2><p style="color:black; font-weight:bold">대학 맛집 리스트</p></h2></a>
                 </div>
-                <div class="row" style="padding: 10px">
+                <div>
                     <div class="list-group">
                         <?php
                         if(!isset($_SESSION['login'])) {
-                            echo "<a href='login.php' class='btn btn-default' role='button'>LOGIN</a>";
+                            echo "<a href='login.php' class='btn btn-success' role='button'>LOGIN</a>";
+                            echo "<a href='registration.php' class='btn btn-light' role='button' style='margin-top:10px'>REGISTRATION</a>";
                         } else { ?>
-                        <p style="font-size:16pt; color:darkgray">Welcome <b><?= $_SESSION['login'] ?></b></p>
-                        <a href='usermodify.php' class='btn btn-light' role='button'>MODIFY</a>
-                        <a href="logout.php" class='btn btn-light' role='button' style="margin-top:10px">LOGOUT</a>
+                        <p style="font-size:16pt; color:forestgreen">Welcome <b><?= $_SESSION['login'] ?></b></p>
+                        <a href='usermodify.php' class='btn btn-success' role='button'>MODIFY</a>
+                        <a href="logout.php" class='btn btn-danger' role='button' style="margin-top:10px">LOGOUT</a>
                         <?php } ?>
                         <br>
-                        <a href="#" class="list-group-item">
+                        <!-- <ul class="list-group">
+                            <li class="list-group-item">전체 보기</li>
+
+                            <li class="list-group-item list-group-item-success"><b>한성대학교</b><br>Hansung University</li>
+                            <li class="list-group-item list-group-item-success"><b>국민대학교</b><br>Kokmin University</li>
+                            <li class="list-group-item list-group-item-success"><b>홍익대학교</b><br>Hongik University</li>
+                            <li class="list-group-item list-group-item-success"><b>건국대학교</b><br>Konkuk University</li>
+                            <li class="list-group-item list-group-item-success"><b>경희대학교</b><br>Kyunghee University</li>
+                            <li class="list-group-item list-group-item-success"><b>한양대학교</b><br>Hanyang University</li>
+                        </ul> -->
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>전체보기</b><br>View All</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한성대학교</b><br>Hansung University</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>국민대학교</b><br>Kokmin University</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>홍익대학교</b><br>Hongik University</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>건국대학교</b><br>Konkuk University</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
+                        <!-- <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">전체 보기</h4>
                             <p class="list-group-item-text">View All</p>
                         </a>
@@ -107,11 +125,11 @@
                         <a href="#" class="list-group-item">
                             <h4 class="list-group-item-heading">한양대학교</h4>
                             <p class="list-group-item-text">Hanyang university</p>
-                        </a>
+                        </a> -->
                         <br>
                         <?php
                             if(!isset($_SESSION['login'])) {
-                                echo "<a href='admin_login.php' class='btn btn-default' role='button'>ADMIN LOGIN</a>";
+                                echo "<a href='admin_login.php' class='btn btn-light' role='button'>ADMIN LOGIN</a>";
                             }?>
                         
                         <!-- <a href="#" class="list-group-item">국민대학교</a>

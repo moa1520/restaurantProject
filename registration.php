@@ -42,32 +42,41 @@ if(isset($_GET['MSG'])) {
 }
 ?>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h2>회원가입</h2>
-                <form method="post" action="registration.php">
-                    <table class="table">
+        <div align="center">
+            <h2><p style="color:forestgreen"><b>Registration</b></p></h2>
+            <form method="post" action="registration.php">
+                <table>
+                    <tbody align='center'>
                         <tr>
-                            <td>UserName</td>
-                            <td><input type="text" name="username"></td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" size="60" name="username" placeholder="ID" class="form-control">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Password</td>
-                            <td><input type="password" name="password"></td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Password" class="form-control">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td>E-mail</td>
-                            <td><input type="text" name="email"></td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="email" placeholder="E-mail" class="form-control">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                            <button type="submit" class="btn btn-default" name="submit">Sign-up</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Sign-up</button>
                             </td>
                         </tr>
-                    </table>
-                </form>
-                <b>Already registered? <a href="login.php"> Login </a></b>
-            </div>
+                    </tbody>
+                </table>
+            </form>
+            <b>Already registered? <a href="login.php"> Login </a></b>
         </div>
     </div>
 </body>

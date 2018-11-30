@@ -23,7 +23,7 @@ if(!isset($_SESSION['adminlogin'])) {
             <th>id</th>
             <th>name</th>
             <th>password</th>
-            <th>email</th>
+            <th>e-mail</th>
             <th>password modify</th>
             <th>delete</th>
         </tr>
@@ -31,7 +31,7 @@ if(!isset($_SESSION['adminlogin'])) {
     <tbody>
         <?php
         $con = mysqli_connect('localhost','root','kang1318','user_db');
-        $query = "SELECT * FROM users order by top DESC";
+        $query = "SELECT * FROM users order by id DESC";
         $result = mysqli_query($con, $query);
 
         while($row = mysqli_fetch_array($result)) {
@@ -46,10 +46,10 @@ if(!isset($_SESSION['adminlogin'])) {
             <td> <?=$password?> </td>
             <td> <?=$email?> </td>
             <td>
-                <a href="modify.php?mod=<?=$id?>&name=<?=$username?>" class="btn btn-default" role="button">Modify</a>
+                <a href="modify.php?mod=<?=$id?>&name=<?=$username?>" class="btn btn-success" role="button">Modify</a>
             </td>
             <td>
-                <a href="delete.php?del=<?=$id?>" class="btn btn-default" role="button" onclick="return confirm('정말 삭제할까요?');">Delete</a>
+                <a href="delete.php?del=<?=$id?>" class="btn btn-danger" role="button" onclick="return confirm('정말 삭제할까요?');">Delete</a>
             </td>
         </tr>
         <?php } ?>
