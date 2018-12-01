@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>대학별 맛집</title>
+    <title>국민대 맛집</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -67,7 +67,7 @@ $row = mysqli_fetch_array($result);
             </div>
             <div class="col-sm-9">
                 <div class="page-header">
-                    <h1>전체 대학교 맛집 리스트</h1>
+                    <h1>국민 대학교 맛집 리스트</h1>
                 </div>
                 <?php
                     while($row) {

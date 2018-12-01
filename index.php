@@ -6,7 +6,19 @@ if(isset($_GET['done'])) {
 }
 
 $con = mysqli_connect('localhost','root','kang1318','user_db');
-$query = "SELECT * FROM post order by id DESC";
+$where = 1;
+
+//사용자가 검색했을 때
+if(isset($_GET['search'])) {
+    if($_GET['search']=="") {
+        $where = 1;
+    } else {
+        $search = $_GET['search'];
+        $where = "title like '%$search%'";
+    }
+}
+
+$query = "SELECT * FROM post WHERE $where order by id DESC";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_array($result);
 
@@ -50,8 +62,8 @@ $row = mysqli_fetch_array($result);
                         <a href="kyunghee.php" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
                         <a href="hanyang.php" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
                         <br>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-3" type="search" placeholder="Search">
+                        <form action="<?=$_SERVER['PHP_SELF']?>" method="get" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-3" name="search" type="search" placeholder="Search">
                             <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
 

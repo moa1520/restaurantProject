@@ -29,6 +29,7 @@
         }
     }
     $university = change($row['board']);
+
 ?>
 <html>
 <head>
@@ -59,16 +60,16 @@
                         <a href="logout.php" class='btn btn-danger' role='button' style="margin-top:10px">LOGOUT</a>
                         <?php } ?>
                         <br>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>전체보기</b><br>View All</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한성대학교</b><br>Hansung University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>국민대학교</b><br>Kokmin University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>홍익대학교</b><br>Hongik University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>건국대학교</b><br>Konkuk University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
+                        <a href="index.php" class="list-group-item list-group-item-action list-group-item-light"><b>전체보기</b><br>View All</a>
+                        <a href="hansung.php" class="list-group-item list-group-item-action list-group-item-light"><b>한성대학교</b><br>Hansung University</a>
+                        <a href="kokmin.php" class="list-group-item list-group-item-action list-group-item-light"><b>국민대학교</b><br>Kokmin University</a>
+                        <a href="hongik.php" class="list-group-item list-group-item-action list-group-item-light"><b>홍익대학교</b><br>Hongik University</a>
+                        <a href="konkuk.php" class="list-group-item list-group-item-action list-group-item-light"><b>건국대학교</b><br>Konkuk University</a>
+                        <a href="kyunghee.php" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
+                        <a href="hanyang.php" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
                         <br>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-3" type="search" placeholder="Search">
+                        <form action="index.php" method="get" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-3" name="search" type="search" placeholder="Search">
                             <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         <br>
@@ -84,13 +85,16 @@
                 <div class="page-header">
                     <h1>전체 대학교 맛집 리스트</h1>
                 </div>
-                <div class="card sm-3">
-                    <img class="card-img-top" src="view.php?id=<?=$row['id']?>" alt="Card image cap" height="500">
-                    <div class="card-body">
-                        <h5 class="card-title"><b><?=$row['title']?></b></h5>
-                        <p class="card-text"><?=$row['comment']?></p>
-                        <p class="card-text"><small class="text-muted">작성자 : <?=$row['username']?></small></p>
-                        <p class="card-text"><small class="text-muted"><?=substr($row['regdate'],5,11)?></small></p>
+                <div class="shadow lg-3 mb-5 bg-white rounded">
+                    <div class="card sm-3">
+                        <!-- <a href="javascript:history.go(-1)">목록으로</a> -->
+                        <img class="card-img-top" src="view.php?id=<?=$row['id']?>" alt="Card image cap" height="500">
+                        <div class="card-body">
+                            <h5 class="card-title"><b><?=$row['title']?></b></h5>
+                            <p class="card-text"><?=$row['comment']?></p>
+                            <p class="card-text"><small class="text-muted">작성자 : <?=$row['username']?></small></p>
+                            <p class="card-text"><small class="text-muted"><?=substr($row['regdate'],5,11)?></small></p>
+                        </div>
                     </div>
                 </div>
             </div>
