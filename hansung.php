@@ -72,7 +72,7 @@ $row = mysqli_fetch_array($result);
                 <?php
                     while($row) {
                 ?>
-                <a href="detail.php?id=<?=$row['id']?>">
+                <a href="detail.php?id=<?=$row['id']?>&before=1">
                     <div class="col-sm-4">
                         <div class="thumbnail" style="height:220px">
                             <img src="view.php?id=<?=$row['id']?>" style="width:100%; height:150px">

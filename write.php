@@ -81,13 +81,13 @@
                         <a href="logout.php" class='btn btn-danger' role='button' style="margin-top:10px">LOGOUT</a>
                         <?php } ?>
                         <br>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>전체보기</b><br>View All</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한성대학교</b><br>Hansung University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>국민대학교</b><br>Kokmin University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>홍익대학교</b><br>Hongik University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>건국대학교</b><br>Konkuk University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
+                        <a href="index.php" class="list-group-item list-group-item-action list-group-item-light"><b>전체보기</b><br>View All</a>
+                        <a href="hansung.php" class="list-group-item list-group-item-action list-group-item-light"><b>한성대학교</b><br>Hansung University</a>
+                        <a href="kokmin.php" class="list-group-item list-group-item-action list-group-item-light"><b>국민대학교</b><br>Kokmin University</a>
+                        <a href="hongik.php" class="list-group-item list-group-item-action list-group-item-light"><b>홍익대학교</b><br>Hongik University</a>
+                        <a href="konkuk.php" class="list-group-item list-group-item-action list-group-item-light"><b>건국대학교</b><br>Konkuk University</a>
+                        <a href="kyunghee.php" class="list-group-item list-group-item-action list-group-item-light"><b>경희대학교</b><br>Kyunghee University</a>
+                        <a href="hanyang.php" class="list-group-item list-group-item-action list-group-item-light"><b>한양대학교</b><br>Hanyang University</a>
                         <br>
                         <form class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-3" type="search" placeholder="Search">

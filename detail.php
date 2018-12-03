@@ -9,22 +9,22 @@
     function change($str) {
         switch($str) {
             case 'hansung':
-                return "한성대학교";
+                return "한성 대학교";
                 break;
             case 'kookmin':
-                return "국민대학교";
+                return "국민 대학교";
                 break;
             case 'hongik':
-                return "홍익대학교";
+                return "홍익 대학교";
                 break;
             case 'konkuk':
-                return "건국대학교";
+                return "건국 대학교";
                 break;
             case 'kyunghee':
-                return "경희대학교";
+                return "경희 대학교";
                 break;
             case 'hanyang':
-                return "한양대학교";
+                return "한양 대학교";
                 break;
         }
     }
@@ -40,6 +40,11 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        .reply {
+            font-size:10pt;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -83,7 +88,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="page-header">
-                    <h1>전체 대학교 맛집 리스트</h1>
+                    <h1><?=change($row['board'])?> 맛집 리스트</h1>
                 </div>
                 <div class="shadow lg-3 mb-5 bg-white rounded">
                     <div class="card sm-3">
@@ -94,6 +99,53 @@
                             <p class="card-text"><?=$row['comment']?></p>
                             <p class="card-text"><small class="text-muted">작성자 : <?=$row['username']?></small></p>
                             <p class="card-text"><small class="text-muted"><?=substr($row['regdate'],5,11)?></small></p>
+                            <a href="index.php" class="text-success">목록으로</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <?php
+                                    if(isset($_SESSION['login'])) {
+                                ?>
+                                <form action="reply.php" method="post">
+                                    <input type="hidden" name="id" value="<?=$id?>">
+                                    <tr>
+                                        <td class="align-middle" style="font-weight:bold" align=center>
+                                            댓글 작성
+                                        </td>
+                                        <td colspan="2">
+                                            <textarea id="exampleFormControlTextarea1" name="comment" class="form-control" rows="3"></textarea>
+                                        </td>
+                                        <td width=10%>
+                                            <br>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </td>
+                                    </tr>
+                                </form>
+                                <?php } ?>
+                                <?php
+                                    $query = "SELECT * FROM reply WHERE post_num='$id'";
+                                    $result = mysqli_query($con, $query);
+                                    $row = mysqli_fetch_array($result);
+                                    while($row) {
+                                ?>
+                                <tr>
+                                    <td width=20% class="reply">
+                                        <?=$row['username']?>
+                                    </td>
+                                    <td colspan="2" class="reply">
+                                        <?=$row['comment']?>
+                                    </td>
+                                    <td width=10% class="reply">
+                                        <?=substr($row['regdate'],5,11)?>
+                                    </td>
+                                </tr>
+                                <?php 
+                                $row = mysqli_fetch_array($result);
+                                }
+                                ?>
+                            </table>
                         </div>
                     </div>
                 </div>
