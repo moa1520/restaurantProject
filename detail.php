@@ -100,6 +100,12 @@
                             <p class="card-text"><small class="text-muted">작성자 : <?=$row['username']?></small></p>
                             <p class="card-text"><small class="text-muted"><?=substr($row['regdate'],5,11)?></small></p>
                             <a href="index.php" class="text-success">목록으로</a>
+                            <?php
+                                if($row['username'] == $_SESSION['login']) {
+                            ?>
+                                <a href='post_modify.php?id=<?=$id?>' class='text-success' style='margin-left:7px'>수정하기</a>
+                                <a href='post_del.php?id=<?=$id?>' class='text-danger' style='margin-left:7px' onclick="return confirm('정말 삭제할까요?');">삭제하기</a>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="card">
