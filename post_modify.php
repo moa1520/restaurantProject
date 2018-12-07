@@ -69,7 +69,7 @@
                     <label>ID</label>
                     <input type="text" class="form-control" placeholder="<?=$_SESSION['login']?>" disabled>
                 </div>
-                <form action="post_modify_ok.php?id=$id" method="POST" enctype="multipart/form-data">
+                <form action="post_modify_ok.php?id=<?=$id?>" method="POST" enctype="multipart/form-data">
                     <label>학교</label>
                     <?php
                         switch($row['board']) {
