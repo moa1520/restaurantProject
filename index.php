@@ -17,11 +17,30 @@ if(isset($_GET['search'])) {
         $where = "title like '%$search%'";
     }
 }
-
 $query = "SELECT * FROM post WHERE $where order by id DESC";
 $result = mysqli_query($con, $query);
-$row = mysqli_fetch_array($result);
+$num = mysqli_num_rows($result);
 
+$page = (isset($_GET['page']))?$_GET['page']:1;
+$list = 9;
+$block = 10;
+$s_point = ($page-1) * $list;
+
+$pageNum = ceil($num/$list);
+$blockNum = ceil($pageNum/$block);
+$nowBlock = ceil($page/$block);
+
+$s_page = ($nowBlock * $block) - ($block - 1);
+if($s_page <= 1) {
+    $s_page = 1;
+}
+$e_page = $nowBlock * $block;
+if($pageNum <= $e_page) {
+    $e_page = $pageNum;
+}
+$query = "SELECT * FROM post WHERE $where order by id DESC LIMIT $s_point, $list";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_array($result);
 ?>
 <html lang="ko-KR">
 
@@ -99,8 +118,23 @@ $row = mysqli_fetch_array($result);
                 $row = mysqli_fetch_array($result);
                 }
                 ?>
+                <nav aria-label="Page navigation example" align='center'>
+                    <ul class="pagination">
+                        <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page-1?>">이전</a> -->
+                        <?php
+                            for ($p=$s_page; $p<=$e_page; $p++) {
+                                if($p == $page) { echo "<li class='page-item'><a class='page-link'>".$p."<span class=sr-only>(current)</span></a></li>"; }
+                                else {
+                        ?>
+                        <li class='page-item'><a class='page-link' href='<?=$_SERVER['PHP_SELF']?>?page=<?=$p?>'><?=$p?></a></li>
+                        <?php
+                            }}
+                        ?>
+                            <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page+1?>">다음</a> -->
+                    </ul>
+                </nav>
                 <div class="col-sm-12" align="right">
-                    <?php 
+                    <?php
                     if(isset($_SESSION['login'])) {
                         echo "<a href='write.php' class='btn btn-primary' role='button'>+ WRITE</a>";
                     }
