@@ -118,21 +118,23 @@ $row = mysqli_fetch_array($result);
                 $row = mysqli_fetch_array($result);
                 }
                 ?>
-                <nav aria-label="Page navigation example" align='center'>
-                    <ul class="pagination">
-                        <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page-1?>">이전</a> -->
-                        <?php
-                            for ($p=$s_page; $p<=$e_page; $p++) {
-                                if($p == $page) { echo "<li class='page-item'><a class='page-link'>".$p."<span class=sr-only>(current)</span></a></li>"; }
-                                else {
-                        ?>
-                        <li class='page-item'><a class='page-link' href='<?=$_SERVER['PHP_SELF']?>?page=<?=$p?>'><?=$p?></a></li>
-                        <?php
-                            }}
-                        ?>
-                            <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page+1?>">다음</a> -->
-                    </ul>
-                </nav>
+                <div class="col-sm-12">
+                    <nav aria-label="Page navigation example" align='center'>
+                        <ul class="pagination">
+                            <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page-1?>">이전</a> -->
+                            <?php
+                                for ($p=$s_page; $p<=$e_page; $p++) {
+                                    if($p == $page) { echo "<li class='page-item'><a class='page-link'>".$p."<span class=sr-only>(current)</span></a></li>"; }
+                                    else {
+                            ?>
+                            <li class='page-item'><a class='page-link' href='<?=$_SERVER['PHP_SELF']?>?page=<?=$p?>'><?=$p?></a></li>
+                            <?php
+                                }}
+                            ?>
+                                <!-- <a href="<?=$_SERVER['PHP_SELF']?>?page=<?=$s_page+1?>">다음</a> -->
+                        </ul>
+                    </nav>
+                </div>
                 <div class="col-sm-12" align="right">
                     <?php
                     if(isset($_SESSION['login'])) {
